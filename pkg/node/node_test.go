@@ -1,18 +1,20 @@
-package darwin_test
+package node_test
 
 import (
 	"testing"
 
-	darwin "github.com/arjungandhi/darwin/pkg"
+	"github.com/arjungandhi/darwin/pkg/node"
+	"github.com/google/uuid"
 	"gopkg.in/yaml.v3"
 )
 
 func TestNode(t *testing.T) {
 	// create a node object
-	n := darwin.Node{
+	n := node.Node{
+		Id:          uuid.New(),
 		Name:        "test",
 		Description: "test node",
-		Parents:     []darwin.Node{},
+		Parents:     []uuid.UUID{},
 		Levels:      []int{1, 4, 10, 20},
 		Unit:        "test",
 	}
@@ -25,7 +27,7 @@ func TestNode(t *testing.T) {
 	t.Logf("Marshalled node:\n%s", d)
 
 	// try to yaml unmarshal the node
-	var n2 darwin.Node
+	var n2 node.Node
 	err = yaml.Unmarshal(d, &n2)
 	if err != nil {
 		t.Errorf("Error unmarshaling node: %s", err)
