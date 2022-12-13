@@ -1,0 +1,13 @@
+id: d8176456-0c4e-44ce-9d30-58d99b0d6e0d
+name: Project
+description: projects you've completed
+title: "Projector"
+levels:
+    - 1
+    - 4
+    - 10
+    - 20
+unit: projects
+parents: 
+  - 1364b9cd-9b59-4131-b40b-2cdd41d92605
+points: 0

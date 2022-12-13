@@ -14,9 +14,11 @@ func TestNode(t *testing.T) {
 		Id:          uuid.New(),
 		Name:        "test",
 		Description: "test node",
-		Parents:     []uuid.UUID{},
-		Levels:      []int{1, 4, 10, 20},
-		Unit:        "test",
+		Parents: []uuid.UUID{
+			uuid.New(),
+		},
+		Levels: []int{1, 4, 10, 20},
+		Unit:   "test",
 	}
 
 	// try to yaml marshal the node

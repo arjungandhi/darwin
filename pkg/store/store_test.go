@@ -39,7 +39,7 @@ func TestLocalStore(t *testing.T) {
 	}
 	defer os.RemoveAll(dir)
 	// create a local store object
-	store := store.LocalStore{
+	var store store.Store = &store.LocalStore{
 		Path: dir,
 	}
 	// iterate over the test nodes
@@ -60,7 +60,11 @@ func TestLocalStore(t *testing.T) {
 	}
 
 	// load all the nodes from the store
-	_, err = store.LoadAll()
+	n, err := store.LoadAll()
+	// check that we have the correct number of nodes
+	if len(n) != len(testNodes) {
+		t.Errorf("Expected %d nodes, got %d", len(testNodes), len(n))
+	}
 	if err != nil {
 		t.Errorf("Error loading all nodes: %s", err)
 	}

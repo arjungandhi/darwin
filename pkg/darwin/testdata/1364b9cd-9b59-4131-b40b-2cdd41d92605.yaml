@@ -1,0 +1,13 @@
+id: 1364b9cd-9b59-4131-b40b-2cdd41d92605
+name: work
+description: do good work  
+title: Worker
+levels:
+    - 1
+    - 4
+    - 10
+    - 20
+unit: test
+parents:
+  - 57c3952c-a2a7-45f0-b439-e3bb22a01a2e
+points: 0

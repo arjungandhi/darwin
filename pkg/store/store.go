@@ -21,14 +21,14 @@ type Store interface {
 	// Load loads a node from its store
 	Load(uuid.UUID) (*node.Node, error)
 	// LoadAll loads all the nodes from its store
-	LoadAll() ([]*node.Node, error)
+	LoadAll() (map[uuid.UUID]*node.Node, error)
 	// Delete deletes a node from its store
 	Delete(*node.Node) error
 }
 
 type LocalStore struct {
 	// Path is the path to the local store
-	Path string
+	Path string `json:"path"`
 }
 
 // Save saves a node to the store
@@ -67,14 +67,14 @@ func (s *LocalStore) Load(id uuid.UUID) (*node.Node, error) {
 
 // LoadAll searches the Path for all nodes that follow the
 // *.yaml format and them loads them into a slice of nodes
-func (s *LocalStore) LoadAll() ([]*node.Node, error) {
+func (s *LocalStore) LoadAll() (map[uuid.UUID]*node.Node, error) {
 	// search the path for all files that follow the *.yaml format
 	matches, err := filepath.Glob(filepath.Join(s.Path, "*.yaml"))
 	if err != nil {
 		return nil, err
 	}
-	// create a slice of nodes
-	nodes := []*node.Node{}
+	// map of nodes
+	nodes := make(map[uuid.UUID]*node.Node)
 	// loop through all the matches
 	for _, match := range matches {
 		// read the file
@@ -88,8 +88,8 @@ func (s *LocalStore) LoadAll() ([]*node.Node, error) {
 		if err != nil {
 			return nil, err
 		}
-		// append the node to the slice
-		nodes = append(nodes, &n)
+		// add the node to the map
+		nodes[n.Id] = &n
 	}
 
 	return nodes, nil
