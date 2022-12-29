@@ -108,18 +108,15 @@ func TestNode(t *testing.T) {
 	t.Run("TestAddPoints", func(t *testing.T) {
 		n.Points = 0
 		for i := 0; i < 25; i++ {
-			// the test for time changing is commented out because the
-			// test is too fast and the time doesn't change
-			// in real life this will never be a problem
-			// oldTime := n.LastAchieved
+			oldTime := n.LastAchieved
 			n.AddPoints(1)
-			// check if the current point value is a level
-			// if n.Points == n.Levels[n.Level()] {
-			//	// check if the last achieved time has changed
-			//	if n.LastAchieved == oldTime {
-			//		t.Errorf("AddPoints(%d) Last achieved time did not change", n.Points)
-			//	}
-			// }
+			//check if the current point value is a level
+			if n.Points == n.Levels[n.Level()] {
+				// check if the last achieved time has changed
+				if n.LastAchieved == oldTime {
+					t.Errorf("AddPoints(%d) Last achieved time did not change", n.Points)
+				}
+			}
 		}
 	})
 

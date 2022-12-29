@@ -61,6 +61,6 @@ func (n *Node) AddPoints(points int) {
 	oldLevel := n.Level()
 	n.Points += points
 	if n.Level() != oldLevel {
-		n.LastAchieved = time.Now().Unix()
+		n.LastAchieved = time.Now().UnixNano()
 	}
 }
