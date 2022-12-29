@@ -8,6 +8,7 @@ levels:
     - 10
     - 20
 unit: projects
+starred: true
 parents: 
   - 1364b9cd-9b59-4131-b40b-2cdd41d92605
 points: 0

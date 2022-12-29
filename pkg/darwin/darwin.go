@@ -71,3 +71,14 @@ func (d *Darwin) Unstar(u uuid.UUID) error {
 	d.Store.Save(n)
 	return nil
 }
+
+// GetStarred returns a list of starred nodes
+func (d *Darwin) GetStarred() []*node.Node {
+	var starred []*node.Node
+	for _, n := range d.Nodes {
+		if n.Starred {
+			starred = append(starred, n)
+		}
+	}
+	return starred
+}
