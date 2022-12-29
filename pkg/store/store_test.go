@@ -42,6 +42,7 @@ func TestLocalStore(t *testing.T) {
 	var store store.Store = &store.LocalStore{
 		Path: dir,
 	}
+
 	// iterate over the test nodes
 	for _, n := range testNodes {
 		// save the node to the store

@@ -28,6 +28,8 @@ type Node struct {
 	Points int `json:"points"`
 	// LastAchieved is the unix timestamp of the last time a level was achieved
 	LastAchieved int64 `json:"last_achieved"`
+	// Starred is a boolean value that represents if the node is starred
+	Starred bool `json:"starred"`
 }
 
 // Progress returns the a value between 0 and 1 representing the
