@@ -2,7 +2,6 @@ package node_test
 
 import (
 	"testing"
-	"time"
 
 	"github.com/arjungandhi/darwin/pkg/node"
 	"github.com/google/uuid"
@@ -11,17 +10,7 @@ import (
 
 func TestNode(t *testing.T) {
 	// create a node object to use for testing
-	n := node.Node{
-		Id:          uuid.New(),
-		Name:        "test",
-		Description: "test node",
-		Parents: []uuid.UUID{
-			uuid.New(),
-		},
-		Levels:       []int{0, 1, 4, 10, 20},
-		Unit:         "test",
-		LastAchieved: time.Now().Unix(),
-	}
+	n := node.NewNode("test", "test node", "test title", "test", []int{0, 1, 4, 10, 20}, []uuid.UUID{uuid.New()})
 	// test that the node can marshal to and from yaml
 	t.Run("TestMarshal", func(t *testing.T) {
 

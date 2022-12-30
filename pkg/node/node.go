@@ -32,6 +32,23 @@ type Node struct {
 	Starred bool `json:"starred"`
 }
 
+// NewNode creates a new node
+// with sane defaults
+func NewNode(name string, description string, title string, unit string, levels []int, parents []uuid.UUID) *Node {
+	return &Node{
+		Id:           uuid.New(),
+		Name:         name,
+		Description:  description,
+		Title:        title,
+		Levels:       levels,
+		Unit:         unit,
+		Parents:      parents,
+		Points:       0,
+		LastAchieved: time.Now().Unix(),
+		Starred:      false,
+	}
+}
+
 // Progress returns the a value between 0 and 1 representing the
 // the amount of points achieved towards the next level
 func (n *Node) Progress() float32 {
