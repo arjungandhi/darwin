@@ -1,9 +1,9 @@
 package main
 
 import (
-	"github.com/arjungandhi/darwin/pkg/darwin"
+	"github.com/arjungandhi/darwin/pkg/cmd"
 )
 
 func main() {
-	darwin.Cmd.Run()
+	cmd.RootCmd.Run()
 }

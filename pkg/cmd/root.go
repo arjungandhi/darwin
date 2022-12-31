@@ -1,4 +1,4 @@
-package darwin
+package cmd
 
 import (
 	"fmt"
@@ -25,8 +25,8 @@ func init() {
 	Z.Vars.Set(".darwin.dir", darwindir)
 }
 
-// darwinCmd is the command that is run when the darwin command is called
-var Cmd = Z.Cmd{
+// RootCmd is the command that is run when the darwin command is called
+var RootCmd = Z.Cmd{
 	Name:    "darwin",
 	Summary: `The darwin command is a command line interface to a darwin skill tree`,
 	Commands: []*Z.Cmd{
