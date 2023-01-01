@@ -44,6 +44,7 @@ func New(name string, parents []uuid.UUID) *Node {
 		Levels:       []int{0, 1, 5, 10, 20, 50},
 		Unit:         "points",
 		Parents:      parents,
+		ParentNodes:  []*Node{},
 		Points:       0,
 		LastAchieved: time.Now().Unix(),
 		Starred:      false,
@@ -82,7 +83,7 @@ func (n *Node) AddPoints(points int) {
 		n.LastAchieved = time.Now().UnixNano()
 	}
 
-	// update the parents
+	// recursively update the parents
 	for _, parent := range n.ParentNodes {
 		parent.AddPoints(points)
 	}

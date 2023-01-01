@@ -12,6 +12,8 @@ func TestNode(t *testing.T) {
 	// create a node object to use for testing
 	n := node.New("test", []uuid.UUID{uuid.New()})
 	n.Levels = []int{0, 1, 4, 10, 20}
+	n1 := node.New("test1", []uuid.UUID{n.Id})
+	n1.ParentNodes = []*node.Node{n}
 	// test that the node can marshal to and from yaml
 	t.Run("TestMarshal", func(t *testing.T) {
 
@@ -107,6 +109,16 @@ func TestNode(t *testing.T) {
 					t.Errorf("AddPoints(%d) Last achieved time did not change", n.Points)
 				}
 			}
+		}
+	})
+
+	// check that adding points also updates the parent nodes
+	t.Run("TestAddPointsParent", func(t *testing.T) {
+		n.Points = 0
+		n1.Points = 0
+		n1.AddPoints(1)
+		if n.Points != 1 {
+			t.Errorf("AddPoints(%d) did not update child node", n.Points)
 		}
 	})
 
