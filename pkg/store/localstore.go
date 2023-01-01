@@ -74,6 +74,12 @@ func (s *LocalStore) LoadAll() (map[uuid.UUID]*node.Node, error) {
 		// add the node to the map
 		nodes[n.Id] = &n
 	}
+	// actually put in referances to the parents
+	for _, n := range nodes {
+		for _, p := range n.Parents {
+			n.ParentNodes = append(n.ParentNodes, nodes[p])
+		}
+	}
 
 	return nodes, nil
 }

@@ -23,7 +23,8 @@ type Node struct {
 	// to a user eg.{Current Level: 100 <unit>}
 	Unit string `json:"unit"`
 	// Parents of the node
-	Parents []uuid.UUID `json:"parents"`
+	Parents     []uuid.UUID `json:"parents"`
+	ParentNodes []*Node     `json:"-"`
 	// points are the current points the user has achieved
 	Points int `json:"points"`
 	// LastAchieved is the unix timestamp of the last time a level was achieved
@@ -79,5 +80,10 @@ func (n *Node) AddPoints(points int) {
 	n.Points += points
 	if n.Level() != oldLevel {
 		n.LastAchieved = time.Now().UnixNano()
+	}
+
+	// update the parents
+	for _, parent := range n.ParentNodes {
+		parent.AddPoints(points)
 	}
 }
