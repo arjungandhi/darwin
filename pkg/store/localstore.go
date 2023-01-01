@@ -1,7 +1,6 @@
 package store
 
 import (
-	"encoding/json"
 	"os"
 	"path/filepath"
 
@@ -17,7 +16,7 @@ type LocalStore struct {
 
 // Save saves a node to the store
 func (s *LocalStore) Save(n *node.Node) error {
-	path := filepath.Join(s.Path, n.Id.String()+".yaml")
+	path := s.NodePath(n)
 	// marshal the node to yaml
 	d, err := yaml.Marshal(n)
 	if err != nil {
@@ -82,15 +81,12 @@ func (s *LocalStore) LoadAll() (map[uuid.UUID]*node.Node, error) {
 // Delete deletes a node from the store
 func (s *LocalStore) Delete(n *node.Node) error {
 	// create the path to the file
-	path := filepath.Join(s.Path, n.Id.String()+".yaml")
+	path := s.NodePath(n)
 	// delete the file
 	return os.Remove(path)
 }
 
-// MarshalJson marshals the node to json
-func (s *LocalStore) MarshalJSON() ([]byte, error) {
-	m := make(map[string]string)
-	m["path"] = s.Path
-	m["type"] = "local"
-	return json.Marshal(m)
+// NodePath returns the path to the node file
+func (s *LocalStore) NodePath(n *node.Node) string {
+	return filepath.Join(s.Path, n.Id.String()+".yaml")
 }

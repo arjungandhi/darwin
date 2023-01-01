@@ -7,6 +7,8 @@ import (
 	Z "github.com/rwxrob/bonzai/z"
 	"github.com/rwxrob/help"
 	"github.com/rwxrob/vars"
+
+	"github.com/arjungandhi/darwin/pkg/cmd/skill"
 )
 
 // init runs immediately after the package is loaded.
@@ -26,11 +28,12 @@ func init() {
 }
 
 // RootCmd is the command that is run when the darwin command is called
-var RootCmd = Z.Cmd{
+var RootCmd = &Z.Cmd{
 	Name:    "darwin",
 	Summary: `The darwin command is a command line interface to a darwin skill tree`,
 	Commands: []*Z.Cmd{
 		help.Cmd,
 		vars.Cmd,
+		skill.Cmd,
 	},
 }

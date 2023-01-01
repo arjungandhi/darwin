@@ -34,14 +34,14 @@ type Node struct {
 
 // NewNode creates a new node
 // with sane defaults
-func NewNode(name string, description string, title string, unit string, levels []int, parents []uuid.UUID) *Node {
+func New(name string, parents []uuid.UUID) *Node {
 	return &Node{
 		Id:           uuid.New(),
 		Name:         name,
-		Description:  description,
-		Title:        title,
-		Levels:       levels,
-		Unit:         unit,
+		Description:  "",
+		Title:        name + "er",
+		Levels:       []int{0, 1, 5, 10, 20, 50},
+		Unit:         "points",
 		Parents:      parents,
 		Points:       0,
 		LastAchieved: time.Now().Unix(),

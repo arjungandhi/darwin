@@ -10,7 +10,8 @@ import (
 
 func TestNode(t *testing.T) {
 	// create a node object to use for testing
-	n := node.NewNode("test", "test node", "test title", "test", []int{0, 1, 4, 10, 20}, []uuid.UUID{uuid.New()})
+	n := node.New("test", []uuid.UUID{uuid.New()})
+	n.Levels = []int{0, 1, 4, 10, 20}
 	// test that the node can marshal to and from yaml
 	t.Run("TestMarshal", func(t *testing.T) {
 
