@@ -25,7 +25,16 @@ var Cmd = &Z.Cmd{
 		help.Cmd,
 	},
 	Call: func(cmd *Z.Cmd, args ...string) error {
-		node, err := Search()
+		// setup the darwin object
+		dStore := &store.LocalStore{Path: Z.Vars.Get(".darwin.dir")}
+		d, err := darwin.Load(
+			dStore,
+		)
+
+		if err != nil {
+			return err
+		}
+		node, err := Search(d)
 		if err != nil {
 			return err
 		}
@@ -43,16 +52,7 @@ var Cmd = &Z.Cmd{
 	},
 }
 
-func Search() (*node.Node, error) {
-	// setup the darwin object
-	dStore := &store.LocalStore{Path: Z.Vars.Get(".darwin.dir")}
-	d, err := darwin.Load(
-		dStore,
-	)
-
-	if err != nil {
-		return nil, err
-	}
+func Search(d *darwin.Darwin) (*node.Node, error) {
 
 	// get a map of node.uuids to node.name
 	nodeNameMap := make(map[string]uuid.UUID)
@@ -73,7 +73,7 @@ func Search() (*node.Node, error) {
 		Options: nodeNames,
 	}
 
-	err = survey.AskOne(qs, &answer)
+	err := survey.AskOne(qs, &answer)
 	if err != nil {
 		return nil, err
 	}

@@ -5,6 +5,7 @@ import (
 	"github.com/rwxrob/help"
 
 	"github.com/arjungandhi/darwin/pkg/cmd/skill/add"
+	"github.com/arjungandhi/darwin/pkg/cmd/skill/del"
 	"github.com/arjungandhi/darwin/pkg/cmd/skill/search"
 )
 
@@ -19,6 +20,7 @@ var Cmd = &Z.Cmd{
 	Commands: []*Z.Cmd{
 		help.Cmd,
 		add.Cmd,
+		del.Cmd,
 		search.Cmd,
 	},
 }
