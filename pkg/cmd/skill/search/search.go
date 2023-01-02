@@ -1,56 +1,11 @@
 package search
 
 import (
-	"fmt"
-
 	"github.com/AlecAivazis/survey/v2"
 	"github.com/arjungandhi/darwin/pkg/darwin"
 	"github.com/arjungandhi/darwin/pkg/node"
-	"github.com/arjungandhi/darwin/pkg/store"
 	"github.com/google/uuid"
-	Z "github.com/rwxrob/bonzai/z"
-	"github.com/rwxrob/help"
-	"gopkg.in/yaml.v3"
 )
-
-func init() {
-	Z.Vars.SoftInit()
-}
-
-// Cmd is the root command
-var Cmd = &Z.Cmd{
-	Name:    "search",
-	Summary: `searches for a skill in the tree, and then prints out its file`,
-	Commands: []*Z.Cmd{
-		help.Cmd,
-	},
-	Call: func(cmd *Z.Cmd, args ...string) error {
-		// setup the darwin object
-		dStore := &store.LocalStore{Path: Z.Vars.Get(".darwin.dir")}
-		d, err := darwin.Load(
-			dStore,
-		)
-
-		if err != nil {
-			return err
-		}
-		node, err := Search(d)
-		if err != nil {
-			return err
-		}
-
-		// print out the node&
-		data, err := yaml.Marshal(node)
-		// remove the \n at the end of the string
-		data = data[:len(data)-1]
-		if err != nil {
-			return err
-		}
-		fmt.Println(string(data))
-
-		return nil
-	},
-}
 
 func Search(d *darwin.Darwin) (*node.Node, error) {
 

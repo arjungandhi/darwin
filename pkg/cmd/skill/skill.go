@@ -6,7 +6,8 @@ import (
 
 	"github.com/arjungandhi/darwin/pkg/cmd/skill/add"
 	"github.com/arjungandhi/darwin/pkg/cmd/skill/del"
-	"github.com/arjungandhi/darwin/pkg/cmd/skill/search"
+	"github.com/arjungandhi/darwin/pkg/cmd/skill/edit"
+	"github.com/arjungandhi/darwin/pkg/cmd/skill/info"
 )
 
 func init() {
@@ -21,6 +22,7 @@ var Cmd = &Z.Cmd{
 		help.Cmd,
 		add.Cmd,
 		del.Cmd,
-		search.Cmd,
+		info.Cmd,
+		edit.Cmd,
 	},
 }
