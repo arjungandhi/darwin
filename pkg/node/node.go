@@ -9,28 +9,28 @@ import (
 
 type Node struct {
 	// Id is a unique identifier for the node
-	Id uuid.UUID `json:"id"`
+	Id uuid.UUID `json:"id" yaml:"id"`
 	// Name of the node
-	Name string `json:"name"`
+	Name string `json:"name" yaml:"name"`
 	// Description of the node
-	Description string `json:"description"`
+	Description string `json:"description" yaml:"description"`
 	// Title you unlock when you achieve a node
-	Title string `json:"title"`
+	Title string `json:"title" yaml:"title"`
 	// Levels points needed to define each level of the node
 	// all levels start at 0
-	Levels []int `json:"levels"`
+	Levels []int `json:"levels" yaml:"levels"`
 	// Unit this a type of the this is useful when displaying info
 	// to a user eg.{Current Level: 100 <unit>}
-	Unit string `json:"unit"`
+	Unit string `json:"unit" yaml:"unit"`
 	// Parents of the node
-	Parents     []uuid.UUID `json:"parents"`
-	ParentNodes []*Node     `json:"-"`
+	Parents     []uuid.UUID `json:"parents"	yaml:"parents"`
+	ParentNodes []*Node     `json:"-" yaml:"-"`
 	// points are the current points the user has achieved
-	Points int `json:"points"`
+	Points int `json:"points" yaml:"points"`
 	// LastAchieved is the unix timestamp of the last time a level was achieved
-	LastAchieved int64 `json:"last_achieved"`
+	LastAchieved int64 `json:"last_achieved" yaml:"last_achieved"`
 	// Starred is a boolean value that represents if the node is starred
-	Starred bool `json:"starred"`
+	Starred bool `json:"starred" yaml:"starred"`
 }
 
 // NewNode creates a new node

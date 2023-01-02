@@ -5,6 +5,7 @@ import (
 	"github.com/rwxrob/help"
 
 	"github.com/arjungandhi/darwin/pkg/cmd/skill/add"
+	"github.com/arjungandhi/darwin/pkg/cmd/skill/search"
 )
 
 func init() {
@@ -18,5 +19,6 @@ var Cmd = &Z.Cmd{
 	Commands: []*Z.Cmd{
 		help.Cmd,
 		add.Cmd,
+		search.Cmd,
 	},
 }
