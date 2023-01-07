@@ -3,7 +3,9 @@
 package darwin
 
 import (
+	"bytes"
 	"fmt"
+	"text/template"
 
 	"github.com/arjungandhi/darwin/pkg/node"
 	"github.com/arjungandhi/darwin/pkg/store"
@@ -11,6 +13,8 @@ import (
 
 	"github.com/goccy/go-graphviz"
 	"github.com/goccy/go-graphviz/cgraph"
+
+	rom "github.com/brandenc40/romannumeral"
 )
 
 type Darwin struct {
@@ -89,19 +93,39 @@ func (d *Darwin) GetStarred() []*node.Node {
 func (d *Darwin) ToGraph() (*cgraph.Graph, error) {
 	g := graphviz.New()
 	graph, err := g.Graph()
+	// set graph properties
+	//layout
+	graph.SetLayout("neato")
 	if err != nil {
 		return nil, err
 	}
+	// setup a template for the node label
+	labeltmpl, err := template.New("label").Funcs(template.FuncMap{"roman": func(i int) string {
+		s := "0"
+		if i != 0 {
+			s, _ = rom.IntToString(i)
+		}
+		return s
 
+	},
+	}).Parse(`{{.Name}}\n{{.Title}} {{roman .Level}}`)
 	nodes := make(map[uuid.UUID]*cgraph.Node)
 	// add nodes to the graph
 	for _, n := range d.Nodes {
 		node, err := graph.CreateNode(n.Id.String())
 		nodes[n.Id] = node
-		node.SetLabel(n.Name)
+
 		if err != nil {
 			return nil, err
 		}
+		var label bytes.Buffer
+		err = labeltmpl.Execute(&label, n)
+		if err != nil {
+			return nil, err
+		}
+
+		node.SetLabel(label.String())
+
 	}
 	// add edges to the graph
 	for _, n := range d.Nodes {

@@ -8,6 +8,7 @@ import (
 	"github.com/rwxrob/help"
 	"github.com/rwxrob/vars"
 
+	"github.com/arjungandhi/darwin/pkg/cmd/graph"
 	"github.com/arjungandhi/darwin/pkg/cmd/skill"
 )
 
@@ -35,5 +36,6 @@ var RootCmd = &Z.Cmd{
 		help.Cmd,
 		vars.Cmd,
 		skill.Cmd,
+		graph.Cmd,
 	},
 }

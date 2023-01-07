@@ -4,6 +4,7 @@ go 1.19
 
 require (
 	github.com/AlecAivazis/survey/v2 v2.3.6
+	github.com/brandenc40/romannumeral v1.1.5
 	github.com/goccy/go-graphviz v0.1.0
 	github.com/google/uuid v1.3.0
 	github.com/rwxrob/bonzai v0.20.10
