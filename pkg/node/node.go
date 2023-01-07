@@ -98,7 +98,3 @@ func (n *Node) AddPoints(points int) {
 		parent.AddPoints(points)
 	}
 }
-
-func Hash(n *Node) uuid.UUID {
-	return n.Id
-}
