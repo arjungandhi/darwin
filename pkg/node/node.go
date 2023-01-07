@@ -55,12 +55,12 @@ func New(name string, parents []uuid.UUID) *Node {
 // the amount of points achieved towards the next level
 func (n *Node) Progress() float32 {
 	currentLevel := n.Level()
-	if currentLevel == len(n.Levels)-1 {
+	nexLevel := n.NextLevel()
+	if currentLevel == nexLevel {
 		return 1
 	}
-	currentLevelPoints := n.Levels[currentLevel]
-	nextLevelPoints := n.Levels[currentLevel+1]
-	return float32(n.Points-currentLevelPoints) / float32(nextLevelPoints-currentLevelPoints)
+	nextLevelPoints := n.Levels[nexLevel]
+	return float32(n.Points) / float32(nextLevelPoints)
 }
 
 // Level returns the current level of the node
@@ -75,6 +75,16 @@ func (n *Node) Level() int {
 	return currentLevel
 }
 
+// NextLevel returns the nextLevel the node could achieve
+// or the max level if the node is already at the max level
+func (n *Node) NextLevel() int {
+	currentLevel := n.Level()
+	if currentLevel == len(n.Levels)-1 {
+		return currentLevel
+	}
+	return currentLevel + 1
+}
+
 // AddPoints adds points to the node and updates the last achieved time
 func (n *Node) AddPoints(points int) {
 	oldLevel := n.Level()
@@ -87,4 +97,8 @@ func (n *Node) AddPoints(points int) {
 	for _, parent := range n.ParentNodes {
 		parent.AddPoints(points)
 	}
+}
+
+func Hash(n *Node) uuid.UUID {
+	return n.Id
 }
