@@ -1,6 +1,7 @@
 package darwin_test
 
 import (
+	"bytes"
 	"path/filepath"
 	"runtime"
 	"testing"
@@ -8,6 +9,7 @@ import (
 	"github.com/arjungandhi/darwin/pkg/darwin"
 	"github.com/arjungandhi/darwin/pkg/node"
 	"github.com/arjungandhi/darwin/pkg/store"
+	"github.com/goccy/go-graphviz"
 	"github.com/google/uuid"
 )
 
@@ -41,6 +43,19 @@ func TestDarwin(t *testing.T) {
 		_, ok := darwinTree.Nodes[node.Id]
 		if !ok {
 			t.Errorf("Node not added")
+		}
+	})
+	// Test converting the darwin tree to a graph
+	t.Run("Graph", func(t *testing.T) {
+		g := graphviz.New()
+		graph, err := darwinTree.ToGraph()
+		if err != nil {
+			t.Errorf("Error converting darwin tree to graph: %s", err)
+		}
+		// render graph
+		var buf bytes.Buffer
+		if err = g.Render(graph, "dot", &buf); err != nil {
+			t.Errorf("Error rendering graph: %s", err)
 		}
 	})
 

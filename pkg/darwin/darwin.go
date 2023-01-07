@@ -8,6 +8,9 @@ import (
 	"github.com/arjungandhi/darwin/pkg/node"
 	"github.com/arjungandhi/darwin/pkg/store"
 	"github.com/google/uuid"
+
+	"github.com/goccy/go-graphviz"
+	"github.com/goccy/go-graphviz/cgraph"
 )
 
 type Darwin struct {
@@ -81,4 +84,35 @@ func (d *Darwin) GetStarred() []*node.Node {
 		}
 	}
 	return starred
+}
+
+func (d *Darwin) ToGraph() (*cgraph.Graph, error) {
+	g := graphviz.New()
+	graph, err := g.Graph()
+	if err != nil {
+		return nil, err
+	}
+
+	nodes := make(map[uuid.UUID]*cgraph.Node)
+	// add nodes to the graph
+	for _, n := range d.Nodes {
+		node, err := graph.CreateNode(n.Id.String())
+		nodes[n.Id] = node
+		node.SetLabel(n.Name)
+		if err != nil {
+			return nil, err
+		}
+	}
+	// add edges to the graph
+	for _, n := range d.Nodes {
+		for _, p := range n.Parents {
+			_, err := graph.CreateEdge("", nodes[p], nodes[n.Id])
+			if err != nil {
+				return nil, err
+			}
+		}
+	}
+
+	return graph, nil
+
 }

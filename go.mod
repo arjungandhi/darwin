@@ -4,6 +4,7 @@ go 1.19
 
 require (
 	github.com/AlecAivazis/survey/v2 v2.3.6
+	github.com/goccy/go-graphviz v0.1.0
 	github.com/google/uuid v1.3.0
 	github.com/rwxrob/bonzai v0.20.10
 	github.com/rwxrob/help v0.7.2
@@ -13,10 +14,13 @@ require (
 )
 
 require (
+	github.com/fogleman/gg v1.3.0 // indirect
+	github.com/golang/freetype v0.0.0-20170609003504-e2365dfdc4a0 // indirect
 	github.com/kballard/go-shellquote v0.0.0-20180428030007-95032a82bc51 // indirect
 	github.com/mattn/go-colorable v0.1.2 // indirect
 	github.com/mattn/go-isatty v0.0.8 // indirect
 	github.com/mgutz/ansi v0.0.0-20170206155736-9520e82c474b // indirect
+	github.com/pkg/errors v0.9.1 // indirect
 	github.com/rogpeppe/go-internal v1.8.1 // indirect
 	github.com/rwxrob/compcmd v0.3.0 // indirect
 	github.com/rwxrob/fn v0.3.3 // indirect
@@ -27,6 +31,7 @@ require (
 	github.com/rwxrob/to v0.11.2 // indirect
 	github.com/tj/assert v0.0.3 // indirect
 	golang.org/x/crypto v0.3.0 // indirect
+	golang.org/x/image v0.0.0-20200119044424-58c23975cae1 // indirect
 	golang.org/x/sys v0.2.0 // indirect
 	golang.org/x/term v0.2.0 // indirect
 	golang.org/x/text v0.4.0 // indirect
