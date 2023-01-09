@@ -30,7 +30,7 @@ var visTmpl = template.Must(template.New("vis").Parse(`<html>
     <meta charset="utf-8" />
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script
-      src="https://cdn.jsdelivr.net/gh/arjungandhi/d3-darwin/d3.darwin.js"
+      src="https://cdn.jsdelivr.net/gh/arjungandhi/d3-darwin@1.0.0/d3.darwin.js"
       charset="utf-8"
     ></script>
   </head>
