@@ -1,6 +1,8 @@
 package progress
 
 import (
+	"fmt"
+
 	sprogress "github.com/arjungandhi/darwin/pkg/cmd/skill/progress"
 	"github.com/arjungandhi/darwin/pkg/darwin"
 	"github.com/arjungandhi/darwin/pkg/node"
@@ -39,6 +41,7 @@ var Cmd = &Z.Cmd{
 		}
 		for _, n := range starredNodes {
 			// if found, print out the progress
+			fmt.Printf("  %s: %s %d\n", n.Name, n.Title, n.Level())
 			err = sprogress.Progress(n)
 			if err != nil {
 				return err
