@@ -9,7 +9,10 @@ import (
 	"github.com/rwxrob/vars"
 
 	"github.com/arjungandhi/darwin/pkg/cmd/graph"
+	"github.com/arjungandhi/darwin/pkg/cmd/points"
+	"github.com/arjungandhi/darwin/pkg/cmd/progress"
 	"github.com/arjungandhi/darwin/pkg/cmd/skill"
+	"github.com/arjungandhi/darwin/pkg/cmd/visualize"
 )
 
 // init runs immediately after the package is loaded.
@@ -37,5 +40,8 @@ var RootCmd = &Z.Cmd{
 		vars.Cmd,
 		skill.Cmd,
 		graph.Cmd,
+		points.Cmd,
+		visualize.Cmd,
+		progress.Cmd,
 	},
 }

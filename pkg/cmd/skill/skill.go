@@ -8,6 +8,7 @@ import (
 	"github.com/arjungandhi/darwin/pkg/cmd/skill/del"
 	"github.com/arjungandhi/darwin/pkg/cmd/skill/edit"
 	"github.com/arjungandhi/darwin/pkg/cmd/skill/info"
+	"github.com/arjungandhi/darwin/pkg/cmd/skill/points"
 	"github.com/arjungandhi/darwin/pkg/cmd/skill/progress"
 	"github.com/arjungandhi/darwin/pkg/cmd/skill/star"
 	"github.com/arjungandhi/darwin/pkg/cmd/skill/unstar"
@@ -30,5 +31,6 @@ var Cmd = &Z.Cmd{
 		progress.Cmd,
 		star.Cmd,
 		unstar.Cmd,
+		points.Cmd,
 	},
 }
