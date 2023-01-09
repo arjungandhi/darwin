@@ -4,6 +4,7 @@ import (
 	Z "github.com/rwxrob/bonzai/z"
 	"github.com/rwxrob/help"
 
+	"github.com/arjungandhi/darwin/pkg/cmd/graph/progress"
 	"github.com/arjungandhi/darwin/pkg/cmd/graph/visualize"
 )
 
@@ -18,5 +19,6 @@ var Cmd = &Z.Cmd{
 	Commands: []*Z.Cmd{
 		help.Cmd,
 		visualize.Cmd,
+		progress.Cmd,
 	},
 }

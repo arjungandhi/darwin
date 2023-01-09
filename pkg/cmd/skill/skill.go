@@ -9,6 +9,8 @@ import (
 	"github.com/arjungandhi/darwin/pkg/cmd/skill/edit"
 	"github.com/arjungandhi/darwin/pkg/cmd/skill/info"
 	"github.com/arjungandhi/darwin/pkg/cmd/skill/progress"
+	"github.com/arjungandhi/darwin/pkg/cmd/skill/star"
+	"github.com/arjungandhi/darwin/pkg/cmd/skill/unstar"
 )
 
 func init() {
@@ -26,5 +28,7 @@ var Cmd = &Z.Cmd{
 		info.Cmd,
 		edit.Cmd,
 		progress.Cmd,
+		star.Cmd,
+		unstar.Cmd,
 	},
 }

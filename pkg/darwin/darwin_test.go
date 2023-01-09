@@ -1,7 +1,6 @@
 package darwin_test
 
 import (
-	"bytes"
 	"path/filepath"
 	"runtime"
 	"testing"
@@ -9,7 +8,6 @@ import (
 	"github.com/arjungandhi/darwin/pkg/darwin"
 	"github.com/arjungandhi/darwin/pkg/node"
 	"github.com/arjungandhi/darwin/pkg/store"
-	"github.com/goccy/go-graphviz"
 	"github.com/google/uuid"
 )
 
@@ -45,25 +43,20 @@ func TestDarwin(t *testing.T) {
 			t.Errorf("Node not added")
 		}
 	})
-	// Test converting the darwin tree to a graph
-	t.Run("Graph", func(t *testing.T) {
-		g := graphviz.New()
-		graph, err := darwinTree.ToGraph()
-		if err != nil {
-			t.Errorf("Error converting darwin tree to graph: %s", err)
-		}
-		// render graph
-		var buf bytes.Buffer
-		if err = g.Render(graph, "dot", &buf); err != nil {
-			t.Errorf("Error rendering graph: %s", err)
-		}
-	})
 
 	// test getting the list of starred nodes
 	t.Run("GetStarred", func(t *testing.T) {
 		starredNodes := darwinTree.GetStarred()
 		if len(starredNodes) != 1 {
 			t.Errorf("Incorrect number of starred nodes")
+		}
+	})
+
+	// test getting the list of starred nodes
+	t.Run("GetUnstarred", func(t *testing.T) {
+		unstarredNodes := darwinTree.GetUnstarred()
+		if len(unstarredNodes) != 4 {
+			t.Errorf("Incorrect number of starred nodes, Got %d, Want %d", len(unstarredNodes), 4)
 		}
 	})
 

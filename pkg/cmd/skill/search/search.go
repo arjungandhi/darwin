@@ -4,22 +4,24 @@ import (
 	"github.com/AlecAivazis/survey/v2"
 	"github.com/arjungandhi/darwin/pkg/darwin"
 	"github.com/arjungandhi/darwin/pkg/node"
-	"github.com/google/uuid"
+	"golang.org/x/exp/maps"
 )
 
 func Search(d *darwin.Darwin) (*node.Node, error) {
+	nodes := maps.Values(d.Nodes)
+	return SearchList(nodes)
+}
+
+func SearchList(nodeList []*node.Node) (*node.Node, error) {
 
 	// get a map of node.uuids to node.name
-	nodeNameMap := make(map[string]uuid.UUID)
-	nodeNames := make([]string, len(d.Nodes)+1)
+	nodeNameMap := make(map[string]*node.Node)
+	nodeNames := make([]string, len(nodeList)+1)
 
-	i := 0
-	for u, n := range d.Nodes {
-		nodeNameMap[n.Name] = u
+	for i, n := range nodeList {
+		nodeNameMap[n.Name] = n
 		nodeNames[i] = n.Name
-		i++
 	}
-
 	// prompt the user for the needed fields
 	var answer string
 
@@ -34,8 +36,7 @@ func Search(d *darwin.Darwin) (*node.Node, error) {
 	}
 
 	// use the nodeNameMap to get the uuid of the node
-	nodeUUID := nodeNameMap[answer]
-	node := d.Nodes[nodeUUID]
+	node := nodeNameMap[answer]
 
 	return node, nil
 }
