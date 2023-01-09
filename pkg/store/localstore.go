@@ -27,6 +27,13 @@ func (s *LocalStore) Save(n *node.Node) error {
 	if err != nil {
 		return err
 	}
+	// loop up the node history and save each parent node
+	for _, p := range n.ParentNodes {
+		err = s.Save(p)
+		if err != nil {
+			return err
+		}
+	}
 	return nil
 }
 
